@@ -1,4 +1,4 @@
-# CostalSeg: Image segmentation for costal erosion monitoring
+# CoastalSeg: Image segmentation for costal erosion monitoring
 
 ## About
 University of Washington Capstone project: Machine Learning for Community-Driven Coastal Erosion Monitoring and Management.  
