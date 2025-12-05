@@ -30,9 +30,20 @@ pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https
 pip install -r requirements.txt
 ```
 
-## Data Preparation
+## Hugging Face login (recommended to avoid rate limits)
+Run once on the machine; authenticated downloads are throttled less.
+```bash
+pip install -U huggingface_hub hf_transfer
+huggingface-cli login  # paste your HF token
+```
+On PowerShell without interactivity:
+```powershell
+setx HF_TOKEN "YOUR_HF_TOKEN"
+```
 
-**1. Download pretrained models (required for inference):**
+## Preparation
+
+**1. Download pretrained models:**
 
 ```bash
 python scripts/fetch_models.py

@@ -7,7 +7,6 @@ CoastalSeg is a project for coastal image segmentation. This guide explains how 
 
 ## 1) Prerequisites
 
-- **Operating system:** Windows 10/11 (64-bit)
 - **Hardware:** NVIDIA GPU (recent driver recommended for CUDA 12.x runtime wheels)
 - **Disk space:** ~1.31 GB
 - **Recommended tools:** Miniconda (or Anaconda), VS Code, Git
@@ -48,7 +47,18 @@ python -c "import torch; print(torch.cuda.is_available())"
 
 ---
 
-## 5) Download pretrained models (required)
+## 5) Hugging Face login (recommended to avoid rate limits)
+
+Run once on the machine; authenticated downloads are throttled less.
+
+```bash
+huggingface-cli login  # paste your HF token
+```
+
+
+---
+
+## 6) Download pretrained models
 
 ```bash
 python scripts/fetch_models.py
@@ -57,7 +67,7 @@ This fetches the trained weights and reference vectors needed for inference.
 
 ---
 
-## 6) (Optional) Download training datasets
+## 7) (Optional) Download training datasets
 
 ```bash
 python scripts/fetch_datasets.py
@@ -66,7 +76,7 @@ Only needed if you plan to retrain locally. Inference does not require these dat
 
 ---
 
-## 7) (Optional) Retrain the models locally
+## 8) (Optional) Retrain the models locally
 
 If you want to reproduce training locally:
 ```bash
@@ -80,7 +90,7 @@ These scripts will run end-to-end and place the resulting model weights where th
 
 ---
 
-## 8) Launch the interactive app (GUI)
+## 9) Launch the interactive app (GUI)
 
 ```bash
 python app.py
@@ -89,7 +99,7 @@ Running this command opens a browser-based interface. You can upload your own im
 
 ---
 
-## 9) Troubleshooting
+## 10) Troubleshooting
 
 - **GPU not detected (`torch.cuda.is_available() == False`)**  
   - Ensure the correct PyTorch wheel is installed (CUDA 12.6 build as shown above).  
@@ -102,7 +112,7 @@ Running this command opens a browser-based interface. You can upload your own im
 
 ---
 
-## 10) Quick command summary
+## 11) Quick command summary
 
 ```bash
 # Clone
