@@ -32,17 +32,23 @@ pip install -r requirements.txt
 
 ## Data Preparation
 
-**1. One-click download of models and datasets (recommended):**
-
-Run a single script to fetch everything to the right places:
+**1. Download pretrained models (required for inference):**
 
 ```bash
-python scripts/fetch_assets.py
+python scripts/fetch_models.py
 ```
 
-**2. Training segmentation model from scratch:**
+**2. (Optional) Download training datasets:**
 
-**SKIP THIS STEP IF YOU DO NOT WANT TO TRAIN MODEL BY YOURSELF**, just use One-click setup above. 
+Needed only if you plan to retrain; inference does not require datasets.
+
+```bash
+python scripts/fetch_datasets.py
+```
+
+**3. Training segmentation model from scratch:**
+
+**SKIP THIS STEP IF YOU DO NOT WANT TO TRAIN MODEL BY YOURSELF**, just use the pretrained models above. 
 
 Start training (two sites):
 

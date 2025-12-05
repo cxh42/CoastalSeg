@@ -48,16 +48,25 @@ python -c "import torch; print(torch.cuda.is_available())"
 
 ---
 
-## 5) One-click download of pretrained models and datasets
+## 5) Download pretrained models (required)
 
 ```bash
-python scripts/fetch_assets.py
+python scripts/fetch_models.py
 ```
-This script downloads the **trained models** and the **datasets used in training** into the correct locations for immediate use.
+This fetches the trained weights and reference vectors needed for inference.
 
 ---
 
-## 6) (Optional) Retrain the models locally
+## 6) (Optional) Download training datasets
+
+```bash
+python scripts/fetch_datasets.py
+```
+Only needed if you plan to retrain locally. Inference does not require these datasets.
+
+---
+
+## 7) (Optional) Retrain the models locally
 
 If you want to reproduce training locally:
 ```bash
@@ -71,7 +80,7 @@ These scripts will run end-to-end and place the resulting model weights where th
 
 ---
 
-## 7) Launch the interactive app (GUI)
+## 8) Launch the interactive app (GUI)
 
 ```bash
 python app.py
@@ -80,7 +89,7 @@ Running this command opens a browser-based interface. You can upload your own im
 
 ---
 
-## 8) Troubleshooting
+## 9) Troubleshooting
 
 - **GPU not detected (`torch.cuda.is_available() == False`)**  
   - Ensure the correct PyTorch wheel is installed (CUDA 12.6 build as shown above).  
@@ -92,13 +101,13 @@ Running this command opens a browser-based interface. You can upload your own im
 
 ---
 
-## 9) License
+## 10) License
 
 See the repository’s `LICENSE` file for the project’s license details.
 
 ---
 
-## 10) Quick command summary (copy-paste)
+## 11) Quick command summary (copy-paste)
 
 ```bash
 # Clone
@@ -113,8 +122,11 @@ conda activate CoastalSeg
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
 
-# Fetch assets
-python scripts/fetch_assets.py
+# Fetch models (required)
+python scripts/fetch_models.py
+
+# (Optional) Fetch datasets
+python scripts/fetch_datasets.py
 
 # (Optional) Train
 python SegmentModelTraining/MetalMarcy/train.py
