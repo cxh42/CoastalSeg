@@ -52,7 +52,7 @@ python -c "import torch; print(torch.cuda.is_available())"
 Run once on the machine; authenticated downloads are throttled less.
 
 ```bash
-huggingface-cli login  # paste your HF token
+hf auth login  # paste your HF token
 ```
 
 
@@ -73,7 +73,7 @@ This fetches the trained weights and reference vectors needed for inference.
 python scripts/fetch_datasets.py
 ```
 Only needed if you plan to retrain locally. Inference does not require these datasets.
-
+You can also see https://huggingface.co/datasets/AveMujica/CostalSeg-SJ and https://huggingface.co/datasets/AveMujica/CostalSeg-MM directly.
 ---
 
 ## 8) (Optional) Retrain the models locally
