@@ -1,4 +1,4 @@
-# CoastalSeg — Installation & User Guide (Windows + NVIDIA GPU)
+# CoastalSeg — Installation & User Guide
 
 **Overview**  
 CoastalSeg is a project for coastal image segmentation. This guide explains how to set up a Windows + NVIDIA GPU environment, fetch pretrained assets, (optionally) retrain, and launch the app for interactive use.
