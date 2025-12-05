@@ -1,7 +1,7 @@
-# CostalSeg — Installation & User Guide (Windows + NVIDIA GPU)
+# CoastalSeg — Installation & User Guide (Windows + NVIDIA GPU)
 
 **Overview**  
-CostalSeg is a project for coastal image segmentation. This guide explains how to set up a Windows + NVIDIA GPU environment, fetch pretrained assets, (optionally) retrain, and launch the app for interactive use.
+CoastalSeg is a project for coastal image segmentation. This guide explains how to set up a Windows + NVIDIA GPU environment, fetch pretrained assets, (optionally) retrain, and launch the app for interactive use.
 
 ---
 
@@ -19,8 +19,8 @@ CostalSeg is a project for coastal image segmentation. This guide explains how t
 ## 2) Clone the repository
 
 ```bash
-git clone https://github.com/cxh42/CostalSeg.git
-cd CostalSeg
+git clone https://github.com/cxh42/CoastalSeg.git
+cd CoastalSeg
 ```
 
 ---
@@ -28,8 +28,8 @@ cd CostalSeg
 ## 3) Create and activate a Conda environment (Python 3.12)
 
 ```bash
-conda create -n CostalSeg python=3.12
-conda activate CostalSeg
+conda create -n CoastalSeg python=3.12
+conda activate CoastalSeg
 ```
 
 ---
@@ -102,12 +102,12 @@ See the repository’s `LICENSE` file for the project’s license details.
 
 ```bash
 # Clone
-git clone https://github.com/cxh42/CostalSeg.git
-cd CostalSeg
+git clone https://github.com/cxh42/CoastalSeg.git
+cd CoastalSeg
 
 # Conda env
-conda create -n CostalSeg python=3.12
-conda activate CostalSeg
+conda create -n CoastalSeg python=3.12
+conda activate CoastalSeg
 
 # Install
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126

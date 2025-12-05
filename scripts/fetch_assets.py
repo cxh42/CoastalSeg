@@ -9,20 +9,20 @@ from huggingface_hub import snapshot_download
 
 
 MODELS = {
-    "MM_best_model.pth": "https://huggingface.co/AveMujica/CostalSeg-MM/resolve/main/MM_best_model.pth",
-    "SJ_best_model.pth": "https://huggingface.co/AveMujica/CostalSeg-SJ/resolve/main/SJ_best_model.pth",
+    "MM_best_model.pth": "https://huggingface.co/AveMujica/CoastalSeg-MM/resolve/main/MM_best_model.pth",
+    "SJ_best_model.pth": "https://huggingface.co/AveMujica/CoastalSeg-SJ/resolve/main/SJ_best_model.pth",
 }
 
 DATASETS = {
     # local_dir relative to repo root
-    "AveMujica/CostalSeg-MM": "SegmentModelTraining/MetalMarcy/dataset",
-    "AveMujica/CostalSeg-SJ": "SegmentModelTraining/SilhouetteJaenette/dataset",
+    "AveMujica/CoastalSeg-MM": "SegmentModelTraining/MetalMarcy/dataset",
+    "AveMujica/CoastalSeg-SJ": "SegmentModelTraining/SilhouetteJaenette/dataset",
 }
 
 REF_VECTORS = {
     # If missing locally, attempt to fetch from the HF Space repo
-    "MM_mean.npy": "https://huggingface.co/spaces/AveMujica/CostalSegment/resolve/main/models/MM_mean.npy",
-    "SJ_mean.npy": "https://huggingface.co/spaces/AveMujica/CostalSegment/resolve/main/models/SJ_mean.npy",
+    "MM_mean.npy": "https://huggingface.co/spaces/AveMujica/CoastalSegment/resolve/main/models/MM_mean.npy",
+    "SJ_mean.npy": "https://huggingface.co/spaces/AveMujica/CoastalSegment/resolve/main/models/SJ_mean.npy",
 }
 
 

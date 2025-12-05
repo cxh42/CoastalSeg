@@ -1,4 +1,4 @@
-# CoastalSeg: Image segmentation for costal erosion monitoring
+# CoastalSeg: Image segmentation for coastal erosion monitoring
 
 ## About
 University of Washington Capstone project: Machine Learning for Community-Driven Coastal Erosion Monitoring and Management.  
@@ -18,13 +18,13 @@ Try image segmentation demo at
 
 https://huggingface.co/spaces/AveMujica/MetalMarcy  
 https://huggingface.co/spaces/AveMujica/SilhouetteJaenette  
-https://huggingface.co/spaces/AveMujica/CostalSegment (slower, integrates outlier detection and spatial alignment, mainly used for the [MyCoast](https://mycoast.org/wa).)  
+https://huggingface.co/spaces/AveMujica/CoastalSegment (slower, integrates outlier detection and spatial alignment, mainly used for the [MyCoast](https://mycoast.org/wa).)  
 
 ## Environmental Setups
 ```bash
-git clone https://github.com/cxh42/CostalSeg.git
+git clone https://github.com/cxh42/CoastalSeg.git
 cd CoastalSeg
-conda create -n CaostalSeg python=3.12
+conda create -n CoastalSeg python=3.12
 conda activate CoastalSeg
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
