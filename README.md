@@ -46,9 +46,7 @@ Needed only if you plan to retrain; inference does not require datasets.
 python scripts/fetch_datasets.py
 ```
 
-**3. Training segmentation model from scratch:**
-
-**SKIP THIS STEP IF YOU DO NOT WANT TO TRAIN MODEL BY YOURSELF**, just use the pretrained models above. 
+**3. (Optional) Training segmentation model from scratch:**
 
 Start training (two sites):
 

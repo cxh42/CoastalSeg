@@ -99,15 +99,10 @@ Running this command opens a browser-based interface. You can upload your own im
 - **Browser doesn’t open automatically**  
   - Press Enter again
 
----
-
-## 10) License
-
-See the repository’s `LICENSE` file for the project’s license details.
 
 ---
 
-## 11) Quick command summary (copy-paste)
+## 10) Quick command summary
 
 ```bash
 # Clone
