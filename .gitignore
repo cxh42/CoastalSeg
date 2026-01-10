@@ -1,3 +1,5 @@
+data/
+
 # Model weights
 *.pth
 *.pt

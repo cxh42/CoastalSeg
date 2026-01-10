@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 import torch
 
-# Reuse model and helpers from the Gradio app
+    # Reuse model and helpers from the Gradio app
 from app import (
     MODEL_PATHS,
     REFERENCE_IMAGE_DIRS,
@@ -20,6 +20,7 @@ from app import (
     create_overlay,
     load_reference_images,
     load_reference_vector,
+    extract_image_datetime,
 )
 from pipeline.ImgOutlier import detect_outliers
 from pipeline.normalization import align_images
@@ -56,13 +57,13 @@ def save_outputs(
 
 
 def write_csv_header(fh):
-    # Dynamic header with classes; plus filename and outlier flag if present later
-    cols = ["filename"] + CLASSES + ["outlier"]
+    # Dynamic header with classes; plus filename, date, and outlier flag
+    cols = ["filename", "image_date"] + CLASSES + ["outlier"]
     fh.write(",".join(cols) + "\n")
 
 
-def write_csv_row(fh, filename: str, percentages: Dict[str, float], outlier: str):
-    row = [filename]
+def write_csv_row(fh, filename: str, date_str: str, percentages: Dict[str, float], outlier: str):
+    row = [filename, date_str]
     # Fill in class order deterministically (missing -> 0)
     for cls in CLASSES:
         row.append(str(percentages.get(cls, 0.0)))
@@ -79,6 +80,9 @@ def list_images(input_dir: str, recursive: bool = False) -> List[str]:
     else:
         for ext in exts:
             files.extend(glob(os.path.join(input_dir, ext)))
+    
+    # Filter out mask files to avoid processing ground truth as input
+    files = [f for f in files if "_mask." not in os.path.basename(f)]
     files.sort()
     return files
 
@@ -121,7 +125,7 @@ def cmd_segment(args: argparse.Namespace) -> int:
         print(f"Model file not found: {model_path}. Please place the weights as documented in README.")
         return 2
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = "cpu" if args.cpu else ("cuda" if torch.cuda.is_available() else "cpu")
     model = load_model(model_path, device)
     if model is None:
         print("Failed to load model.")
@@ -154,6 +158,9 @@ def cmd_segment(args: argparse.Namespace) -> int:
                 mask, seg_map, overlay = infer_image(model, device, path)
                 perc = compute_class_percentages(mask)
 
+                # Extract date from filename
+                _, date_str = extract_image_datetime(path)
+
                 # Determine outlier status if enabled
                 outlier_flag = "NA"
                 if do_outlier and ref_images:
@@ -173,7 +180,7 @@ def cmd_segment(args: argparse.Namespace) -> int:
                 out_base = os.path.join(output_dir, base)
                 save_outputs(seg_map, overlay, out_base, save_seg, save_overlay)
 
-                write_csv_row(fh, os.path.basename(path), perc, outlier_flag)
+                write_csv_row(fh, os.path.basename(path), date_str, perc, outlier_flag)
                 if idx % 10 == 0 or idx == len(files):
                     print(f"Processed {idx}/{len(files)} images...")
             except Exception as e:
@@ -205,7 +212,7 @@ def cmd_align(args: argparse.Namespace) -> int:
         print(f"Reference image not found: {reference}")
         return 2
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = "cpu" if args.cpu else ("cuda" if torch.cuda.is_available() else "cpu")
     model = load_model(model_path, device)
     if model is None:
         print("Failed to load model.")
@@ -248,7 +255,10 @@ def cmd_align(args: argparse.Namespace) -> int:
                 out_base = os.path.join(output_dir, base)
                 save_outputs(seg_map, overlay, out_base, save_seg, save_overlay)
 
-                write_csv_row(fh, os.path.basename(path), perc, outlier="NA")
+                # Extract date from filename
+                _, date_str = extract_image_datetime(path)
+
+                write_csv_row(fh, os.path.basename(path), date_str, perc, outlier="NA")
                 if idx % 10 == 0 or idx == len(files):
                     print(f"Processed {idx}/{len(files)} images...")
             except Exception as e:
@@ -274,6 +284,7 @@ def build_parser() -> argparse.ArgumentParser:
     ps.add_argument("--overlay", action="store_true", help="Save overlay image in addition to segmentation map")
     ps.add_argument("--no-seg", action="store_true", help="Do not save segmentation map image")
     ps.add_argument("--outlier", action="store_true", help="Run outlier detection and include in CSV")
+    ps.add_argument("--cpu", action="store_true", help="Force CPU execution (useful if GPU is incompatible)")
     ps.set_defaults(func=cmd_segment)
 
     # align subcommand
@@ -285,6 +296,7 @@ def build_parser() -> argparse.ArgumentParser:
     pa.add_argument("--recursive", action="store_true", help="Recursively search for images")
     pa.add_argument("--overlay", action="store_true", help="Save overlay image in addition to segmentation map")
     pa.add_argument("--no-seg", action="store_true", help="Do not save segmentation map image")
+    pa.add_argument("--cpu", action="store_true", help="Force CPU execution (useful if GPU is incompatible)")
     pa.set_defaults(func=cmd_align)
 
     return p
